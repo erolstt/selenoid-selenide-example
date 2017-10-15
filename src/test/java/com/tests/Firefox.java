@@ -5,6 +5,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.pages.HomePage;
 import com.pages.MovieDetailPage;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -14,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.hamcrest.CoreMatchers.containsString;
 
 // added the same class but with Firefox. just to see how selenoide handle parallel execution with different browsers
 public class Firefox {
@@ -38,6 +40,6 @@ public class Firefox {
         homePage.searchFor(searchText)
                 .goToFirstSearchResult();
         MovieDetailPage movieDetailPage = new MovieDetailPage();
-        movieDetailPage.getMovieTitle().contains(searchText);
+        Assert.assertThat(movieDetailPage.getMovieTitle(),containsString(searchText));
     }
 }
